@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Wedding - Arjun & Patricia</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">S & P</div>
+            <button class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#story" class="nav-link">Our Story</a></li>
+                <li><a href="#bigday" class="nav-link">The Big Day</a></li>
+                <li><a href="#attire" class="nav-link">Attire</a></li>
+                <li><a href="#rsvp" class="nav-link">RSVP</a></li>
+                <li><a href="#entourage" class="nav-link">Entourage</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="hero-content">
+            <h1 class="hero-names">Arjun & Patricia</h1>
+            <div class="hero-date">December 25, 2026</div>
+            <p class="hero-subtitle">We're getting married!</p>
+        </div>
+        <div class="scroll-indicator" onclick="scrollToNextSection()">
+            <span>↓</span>
+        </div>
+    </section>
+
+    <!-- Our Story Section -->
+    <section id="story" class="section">
+        <div class="container">
+            <h2 class="section-title">Our Story</h2>
+            <div class="story-content">
+                <div class="story-block">
+                    <div class="story-image">
+                        <img src="https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?w=600&h=400&fit=crop" alt="Our first meeting">
+                    </div>
+                    <div class="story-text">
+                        <h3>How We Met</h3>
+                        <p>Our journey began over a decade ago when fate brought us together. What started as a simple friendship grew into something extraordinary. Through laughter, adventures, and countless memories, we discovered that we were meant to be together.</p>
+                    </div>
+                </div>
+
+                <div class="story-block reverse">
+                    <div class="story-image">
+                        <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=600&h=400&fit=crop" alt="Our journey">
+                    </div>
+                    <div class="story-text">
+                        <h3>The Journey</h3>
+                        <p>Over 10 beautiful years, we've built a life filled with love, support, and endless possibilities. From creating content together to exploring the world, every moment has strengthened our bond. Now, we're ready to start our forever.</p>
+                    </div>
+                </div>
+
+                <div class="story-block">
+                    <div class="story-image">
+                        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=600&h=400&fit=crop" alt="The proposal">
+                    </div>
+                    <div class="story-text">
+                        <h3>The Proposal</h3>
+                        <p>Under the stars, surrounded by the warmth of our love, the question was asked and answered with tears of joy. It was a perfect moment that marked the beginning of our next chapter together.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Big Day Section -->
+    <section id="bigday" class="section section-alt">
+        <div class="container">
+            <h2 class="section-title">The Big Day</h2>
+            
+            <div class="event-cards">
+                <!-- Ceremony Card -->
+                <div class="event-card">
+                    <div class="event-image">
+                        <img src="https://images.unsplash.com/photo-1478147427282-58a87a120781?w=600&h=400&fit=crop" alt="Church">
+                    </div>
+                    <div class="event-details">
+                        <h3>Ceremony</h3>
+                        <div class="event-info">
+                            <div class="info-item">
+                                <span class="info-icon">📅</span>
+                                <span>December 25, 2026</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-icon">⏰</span>
+                                <span>2:00 PM</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-icon">⛪</span>
+                                <span>St. Mary's Cathedral<br>123 Church Street, Your City</span>
+                            </div>
+                        </div>
+                        <button class="btn-map" onclick="openMap('ceremony')">View Map</button>
+                    </div>
+                </div>
+
+                <!-- Reception Card -->
+                <div class="event-card">
+                    <div class="event-image">
+                        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=600&h=400&fit=crop" alt="Reception">
+                    </div>
+                    <div class="event-details">
+                        <h3>Reception</h3>
+                        <div class="event-info">
+                            <div class="info-item">
+                                <span class="info-icon">📅</span>
+                                <span>December 25, 2026</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-icon">⏰</span>
+                                <span>5:00 PM</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-icon">🏛️</span>
+                                <span>Grand Ballroom<br>456 Reception Avenue, Your City</span>
+                            </div>
+                        </div>
+                        <button class="btn-map" onclick="openMap('reception')">View Map</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Parking Information -->
+            <div class="parking-info">
+                <h3>Parking Information</h3>
+                <p>Ample parking is available at both venues. Click below to view the parking map.</p>
+                <button class="btn-secondary" onclick="openParkingMap()">View Parking Map</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Attire Section -->
+    <section id="attire" class="section">
+        <div class="container">
+            <h2 class="section-title">Attire</h2>
+            <p class="section-subtitle">Formal Attire Requested</p>
+            
+            <div class="attire-grid">
+                <!-- Ladies -->
+                <div class="attire-card">
+                    <h3>For the Ladies</h3>
+                    <div class="attire-image">
+                        <img src="https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=400&h=500&fit=crop" alt="Ladies formal attire">
+                    </div>
+                    <div class="attire-details">
+                        <p>Long gowns or cocktail dresses in our wedding colors</p>
+                        <div class="color-palette">
+                            <span class="color-label">Color Palette:</span>
+                            <div class="color-swatches">
+                                <span class="color-swatch" style="background-color: #E8D5C4;" title="Champagne"></span>
+                                <span class="color-swatch" style="background-color: #D4A5A5;" title="Dusty Rose"></span>
+                                <span class="color-swatch" style="background-color: #9B8B7E;" title="Taupe"></span>
+                                <span class="color-swatch" style="background-color: #B8A398;" title="Warm Grey"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gentlemen -->
+                <div class="attire-card">
+                    <h3>For the Gentlemen</h3>
+                    <div class="attire-image">
+                        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=400&h=500&fit=crop" alt="Gentlemen formal attire">
+                    </div>
+                    <div class="attire-details">
+                        <p>Dark suits or tuxedos with coordinating ties</p>
+                        <div class="color-palette">
+                            <span class="color-label">Color Palette:</span>
+                            <div class="color-swatches">
+                                <span class="color-swatch" style="background-color: #2C3E50;" title="Navy"></span>
+                                <span class="color-swatch" style="background-color: #34495E;" title="Charcoal"></span>
+                                <span class="color-swatch" style="background-color: #1C2833;" title="Black"></span>
+                                <span class="color-swatch" style="background-color: #5D6D7E;" title="Grey"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RSVP Section -->
+    <section id="rsvp" class="section section-alt">
+        <div class="container">
+            <h2 class="section-title">RSVP</h2>
+            <p class="section-subtitle">Please let us know if you can join us</p>
+            
+            <div class="rsvp-container">
+                <!-- Sign-in prompt -->
+                <div id="signInPrompt" class="rsvp-signin">
+                    <p>Please sign in with Google to RSVP</p>
+                    <div id="g_id_onload"
+                         data-client_id="844692197206-n333q1h31ajev3jkvk0r7khl7jg6ofu2.apps.googleusercontent.com"
+                         data-callback="handleCredentialResponse"
+                         data-auto_prompt="false">
+                    </div>
+                    <div class="g_id_signin"
+                         data-type="standard"
+                         data-size="large"
+                         data-theme="outline"
+                         data-text="sign_in_with"
+                         data-shape="rectangular"
+                         data-logo_alignment="left">
+                    </div>
+                </div>
+
+                <!-- RSVP Form -->
+                <form id="rsvpForm" class="rsvp-form" style="display: none;">
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" readonly required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contact">Contact Number *</label>
+                        <input type="tel" id="contact" name="contact" required placeholder="+63 XXX XXX XXXX"
+                               pattern="^\+63\s?\d{3}\s?\d{3}\s?\d{4}$"
+                               title="Please enter a valid Philippine phone number (e.g., +63 912 345 6789)">
+                        <small style="display: block; margin-top: 0.5rem; color: var(--color-text-light); font-size: 0.875rem;">In case the couple needs to get in touch with you.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Will you be attending? *</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="attending" value="Yes" required>
+                                <span>Joyfully Accept</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="attending" value="No" required>
+                                <span>Regretfully Decline</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Submit RSVP</button>
+                </form>
+
+                <!-- Already Responded Message -->
+                <div id="alreadyResponded" class="rsvp-success" style="display: none;">
+                    <div class="success-icon">✓</div>
+                    <h3>You're on the list!</h3>
+                    <p>Thank you for your response. We look forward to celebrating with you!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Entourage Section -->
+    <section id="entourage" class="section">
+        <div class="container">
+            <h2 class="section-title">Entourage</h2>
+            
+            <!-- Parents -->
+            <div class="entourage-group parents">
+                <h3>Parents</h3>
+                <div class="entourage-columns">
+                    <div class="entourage-side">
+                        <h4>Parents of the Bride</h4>
+                        <p>Mr. & Mrs. John Doe</p>
+                    </div>
+                    <div class="entourage-side">
+                        <h4>Parents of the Groom</h4>
+                        <p>Mr. & Mrs. James Smith</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Principal Sponsors -->
+            <div class="entourage-group">
+                <h3>Principal Sponsors</h3>
+                <div class="entourage-columns">
+                    <div class="entourage-side">
+                        <h4>Ninongs</h4>
+                        <ul class="entourage-list">
+                            <li>Mr. Robert Johnson</li>
+                            <li>Mr. Michael Brown</li>
+                            <li>Mr. David Wilson</li>
+                            <li>Mr. Richard Garcia</li>
+                        </ul>
+                    </div>
+                    <div class="entourage-side">
+                        <h4>Ninangs</h4>
+                        <ul class="entourage-list">
+                            <li>Mrs. Maria Martinez</li>
+                            <li>Mrs. Jennifer Rodriguez</li>
+                            <li>Mrs. Linda Hernandez</li>
+                            <li>Mrs. Patricia Lopez</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Best Man & Maid of Honor -->
+            <div class="entourage-group">
+                <h3>Best Man & Maid of Honor</h3>
+                <div class="entourage-columns">
+                    <div class="entourage-side">
+                        <h4>Best Man</h4>
+                        <p>Christopher Anderson</p>
+                    </div>
+                    <div class="entourage-side">
+                        <h4>Maid of Honor</h4>
+                        <p>Sarah Williams</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Groomsmen & Bridesmaids -->
+            <div class="entourage-group">
+                <h3>Groomsmen & Bridesmaids</h3>
+                <div class="entourage-columns">
+                    <div class="entourage-side">
+                        <h4>Groomsmen</h4>
+                        <ul class="entourage-list">
+                            <li>Matthew Taylor</li>
+                            <li>Andrew Thomas</li>
+                            <li>Daniel Jackson</li>
+                        </ul>
+                    </div>
+                    <div class="entourage-side">
+                        <h4>Bridesmaids</h4>
+                        <ul class="entourage-list">
+                            <li>Emily White</li>
+                            <li>Jessica Harris</li>
+                            <li>Ashley Martin</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Secondary Sponsors -->
+            <div class="entourage-group">
+                <h3>Secondary Sponsors</h3>
+                <div class="secondary-sponsors">
+                    <div class="sponsor-item">
+                        <strong>Candle:</strong> Mr. & Mrs. Thompson
+                    </div>
+                    <div class="sponsor-item">
+                        <strong>Veil:</strong> Mr. & Mrs. Davis
+                    </div>
+                    <div class="sponsor-item">
+                        <strong>Cord:</strong> Mr. & Mrs. Miller
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>With love, Arjun & Patricia</p>
+            <p class="footer-date">December 25, 2026</p>
+        </div>
+    </footer>
+
+    <!-- Map Modal -->
+    <div id="mapModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <div id="mapContainer"></div>
+        </div>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" class="scroll-to-top" onclick="scrollToHero()" title="Back to top">
+        ↑
+    </button>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
