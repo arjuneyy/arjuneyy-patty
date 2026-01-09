@@ -12,11 +12,14 @@ const CONFIG = {
 
 // State
 let currentUser = null;
+let deferredPrompt = null;
 
 document.addEventListener('DOMContentLoaded', function() {
     initNavigation();
     initScrollEffects();
     registerServiceWorker();
+    initCountdown();
+    initInstallPrompt();
 });
 
 // Register Service Worker for PWA
@@ -345,7 +348,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (contactInput) {
         contactInput.addEventListener('input', function(e) {
             let value = e.target.value.replace(/\D/g, '');
-            
+
             // Format as +63 XXX XXX XXXX for Philippine numbers
             if (value.startsWith('63')) {
                 if (value.length > 2) {
@@ -358,8 +361,109 @@ document.addEventListener('DOMContentLoaded', function() {
                     value = value.substring(0, 11) + ' ' + value.substring(11, 15);
                 }
             }
-            
+
             e.target.value = value;
         });
     }
 });
+
+// Countdown Timer
+function initCountdown() {
+    // Wedding date: December 25, 2026 at 2:00 PM
+    const weddingDate = new Date('2026-12-25T14:00:00').getTime();
+
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = weddingDate - now;
+
+        if (distance < 0) {
+            // Wedding has passed
+            document.getElementById('days').textContent = '0';
+            document.getElementById('hours').textContent = '0';
+            document.getElementById('minutes').textContent = '0';
+            document.getElementById('seconds').textContent = '0';
+            return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById('days').textContent = days;
+        document.getElementById('hours').textContent = hours;
+        document.getElementById('minutes').textContent = minutes;
+        document.getElementById('seconds').textContent = seconds;
+    }
+
+    // Update immediately and then every second
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+}
+
+// PWA Install Prompt
+function initInstallPrompt() {
+    const installPrompt = document.getElementById('installPrompt');
+    const installButton = document.getElementById('installButton');
+    const dismissButton = document.getElementById('dismissInstall');
+
+    // Check if user has already dismissed or installed
+    const hasPromptBeenDismissed = localStorage.getItem('installPromptDismissed');
+
+    // Listen for the beforeinstallprompt event
+    window.addEventListener('beforeinstallprompt', (e) => {
+        // Prevent the mini-infobar from appearing on mobile
+        e.preventDefault();
+
+        // Stash the event so it can be triggered later
+        deferredPrompt = e;
+
+        // Show the install prompt if not dismissed
+        if (!hasPromptBeenDismissed) {
+            setTimeout(() => {
+                installPrompt.style.display = 'block';
+                setTimeout(() => {
+                    installPrompt.classList.add('show');
+                }, 100);
+            }, 3000); // Show after 3 seconds
+        }
+    });
+
+    // Handle install button click
+    installButton.addEventListener('click', async () => {
+        if (!deferredPrompt) {
+            return;
+        }
+
+        // Show the install prompt
+        deferredPrompt.prompt();
+
+        // Wait for the user to respond to the prompt
+        await deferredPrompt.userChoice;
+
+        // Clear the deferredPrompt
+        deferredPrompt = null;
+
+        // Hide the install prompt
+        hideInstallPrompt();
+    });
+
+    // Handle dismiss button click
+    dismissButton.addEventListener('click', () => {
+        localStorage.setItem('installPromptDismissed', 'true');
+        hideInstallPrompt();
+    });
+
+    function hideInstallPrompt() {
+        installPrompt.classList.remove('show');
+        setTimeout(() => {
+            installPrompt.style.display = 'none';
+        }, 300);
+    }
+
+    // Listen for successful installation
+    window.addEventListener('appinstalled', () => {
+        console.log('PWA installed successfully');
+        hideInstallPrompt();
+    });
+}

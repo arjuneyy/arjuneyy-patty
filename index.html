@@ -46,12 +46,46 @@
         </div>
     </nav>
 
+    <!-- PWA Install Prompt -->
+    <div id="installPrompt" class="install-prompt" style="display: none;">
+        <div class="install-prompt-content">
+            <div class="install-prompt-text">
+                <strong>Install on your device</strong>
+                <p>Add our wedding app to your home screen for quick access!</p>
+            </div>
+            <div class="install-prompt-actions">
+                <button id="installButton" class="btn-install">Install</button>
+                <button id="dismissInstall" class="btn-dismiss">Later</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Hero Section -->
     <section id="hero">
         <div class="hero-content">
             <h1 class="hero-names">Arjun & Patricia</h1>
             <div class="hero-date">December 25, 2026</div>
             <p class="hero-subtitle">We're getting married!</p>
+
+            <!-- Countdown Timer -->
+            <div class="countdown-timer">
+                <div class="countdown-item">
+                    <span class="countdown-value" id="days">0</span>
+                    <span class="countdown-label">Days</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-value" id="hours">0</span>
+                    <span class="countdown-label">Hours</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-value" id="minutes">0</span>
+                    <span class="countdown-label">Minutes</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-value" id="seconds">0</span>
+                    <span class="countdown-label">Seconds</span>
+                </div>
+            </div>
         </div>
         <div class="scroll-indicator" onclick="scrollToNextSection()">
             <span>↓</span>

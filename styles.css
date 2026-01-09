@@ -34,26 +34,21 @@
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 0;
-    /* Set background for overscroll - matches hero image */
-    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
-                url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&h=1080&fit=crop') center/cover fixed;
     overflow-x: hidden;
     /* Prevent overscroll bounce */
     overscroll-behavior-y: none;
+    /* Fallback background color for overscroll */
+    background-color: #9B8B7E;
 }
 
 body {
     font-family: var(--font-sans);
     color: var(--color-text);
     line-height: 1.7;
-    /* Remove default background since html handles it */
-    background-color: transparent;
+    background-color: var(--color-bg);
     min-height: 100vh;
     /* Prevent overscroll on body as well */
     overscroll-behavior-y: none;
-    /* Fix for iOS Safari */
-    position: relative;
-    overflow-x: hidden;
 }
 
 /* Navigation */
@@ -152,8 +147,10 @@ body {
 /* Hero Section */
 #hero {
     height: 100vh;
-    /* Transparent background - relies on html background */
-    background: transparent;
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+                url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&h=1080&fit=crop') center/cover no-repeat;
+    background-color: #9B8B7E;
+    background-attachment: scroll;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -187,6 +184,125 @@ body {
     font-size: 1.2rem;
     font-weight: 300;
     letter-spacing: 2px;
+    margin-bottom: 3rem;
+}
+
+/* Countdown Timer */
+.countdown-timer {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin-top: 3rem;
+}
+
+.countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 80px;
+}
+
+.countdown-value {
+    font-size: 3rem;
+    font-weight: 700;
+    font-family: var(--font-serif);
+    line-height: 1;
+    color: white;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.countdown-label {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 0.5rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 300;
+}
+
+/* PWA Install Prompt */
+.install-prompt {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.9));
+    backdrop-filter: blur(10px);
+    padding: 1.5rem;
+    z-index: 2000;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.install-prompt.show {
+    transform: translateY(0);
+}
+
+.install-prompt-content {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    color: white;
+}
+
+.install-prompt-text strong {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+    color: white;
+}
+
+.install-prompt-text p {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+}
+
+.install-prompt-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-shrink: 0;
+}
+
+.btn-install {
+    padding: 0.75rem 1.5rem;
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    white-space: nowrap;
+}
+
+.btn-install:hover {
+    background-color: var(--color-secondary);
+    transform: translateY(-2px);
+}
+
+.btn-dismiss {
+    padding: 0.75rem 1rem;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    white-space: nowrap;
+}
+
+.btn-dismiss:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border-color: rgba(255, 255, 255, 0.5);
 }
 
 .scroll-indicator {
@@ -880,6 +996,33 @@ footer p {
 
     .hero-date {
         font-size: 1.2rem;
+    }
+
+    .countdown-timer {
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+
+    .countdown-item {
+        min-width: 60px;
+    }
+
+    .countdown-value {
+        font-size: 2rem;
+    }
+
+    .countdown-label {
+        font-size: 0.75rem;
+    }
+
+    .install-prompt-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .install-prompt-actions {
+        width: 100%;
+        justify-content: center;
     }
 
     .section-title {
