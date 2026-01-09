@@ -16,7 +16,23 @@ let currentUser = null;
 document.addEventListener('DOMContentLoaded', function() {
     initNavigation();
     initScrollEffects();
+    registerServiceWorker();
 });
+
+// Register Service Worker for PWA
+function registerServiceWorker() {
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/service-worker.js')
+                .then((registration) => {
+                    console.log('Service Worker registered successfully:', registration.scope);
+                })
+                .catch((error) => {
+                    console.log('Service Worker registration failed:', error);
+                });
+        });
+    }
+}
 
 // Scroll to next section when clicking arrow
 function scrollToNextSection() {

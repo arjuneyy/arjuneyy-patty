@@ -33,15 +33,27 @@
 
 html {
     scroll-behavior: smooth;
-    scroll-snap-type: y mandatory;
     scroll-padding-top: 0;
+    /* Set background for overscroll - matches hero image */
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+                url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&h=1080&fit=crop') center/cover fixed;
+    overflow-x: hidden;
+    /* Prevent overscroll bounce */
+    overscroll-behavior-y: none;
 }
 
 body {
     font-family: var(--font-sans);
     color: var(--color-text);
     line-height: 1.7;
-    background-color: var(--color-bg);
+    /* Remove default background since html handles it */
+    background-color: transparent;
+    min-height: 100vh;
+    /* Prevent overscroll on body as well */
+    overscroll-behavior-y: none;
+    /* Fix for iOS Safari */
+    position: relative;
+    overflow-x: hidden;
 }
 
 /* Navigation */
@@ -140,8 +152,8 @@ body {
 /* Hero Section */
 #hero {
     height: 100vh;
-    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
-                url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&h=1080&fit=crop') center/cover;
+    /* Transparent background - relies on html background */
+    background: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -153,6 +165,7 @@ body {
 
 .hero-content {
     z-index: 1;
+    position: relative;
 }
 
 .hero-names {
@@ -211,6 +224,8 @@ body {
     scroll-snap-align: start;
     scroll-snap-stop: normal;
     min-height: 100vh;
+    background-color: var(--color-bg);
+    position: relative;
 }
 
 .section-alt {
@@ -735,6 +750,7 @@ footer {
     text-align: center;
     scroll-snap-align: end;
     min-height: auto;
+    position: relative;
 }
 
 footer p {

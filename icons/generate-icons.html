@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate PWA Icons</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            text-align: center;
+        }
+        canvas {
+            border: 1px solid #ddd;
+            margin: 20px 0;
+            display: none;
+        }
+        .instructions {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        button {
+            background: #E8D5C4;
+            color: #333;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        button:hover {
+            background: #D4A5A5;
+        }
+        .preview {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .preview-item {
+            text-align: center;
+        }
+        .preview-item img {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .download-links {
+            display: none;
+            margin: 20px 0;
+        }
+        .download-links a {
+            display: inline-block;
+            margin: 5px;
+            padding: 10px 20px;
+            background: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>PWA Icon Generator</h1>
+    <p>Generate icons for your wedding PWA app</p>
+
+    <div class="instructions">
+        <h3>Instructions:</h3>
+        <ol>
+            <li>Click "Generate Icons" below</li>
+            <li>Download each icon by right-clicking and selecting "Save Image As..."</li>
+            <li>Save them to the <code>/icons</code> folder with their respective names</li>
+            <li>Or upload your own custom 512x512 PNG icon and generate from that</li>
+        </ol>
+    </div>
+
+    <input type="file" id="customIcon" accept="image/*" style="margin: 20px 0;">
+    <br>
+    <button onclick="generateIcons()">Generate Icons</button>
+
+    <div id="preview" class="preview"></div>
+    <canvas id="canvas"></canvas>
+
+    <script>
+        const sizes = [72, 96, 128, 144, 152, 192, 384, 512];
+
+        function generateIcons() {
+            const fileInput = document.getElementById('customIcon');
+            const preview = document.getElementById('preview');
+            preview.innerHTML = '';
+
+            if (fileInput.files && fileInput.files[0]) {
+                // Use custom uploaded image
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = new Image();
+                    img.onload = function() {
+                        generateIconsFromImage(img);
+                    };
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                // Generate default wedding icons
+                generateDefaultIcons();
+            }
+        }
+
+        function generateDefaultIcons() {
+            const preview = document.getElementById('preview');
+
+            sizes.forEach(size => {
+                const canvas = document.createElement('canvas');
+                canvas.width = size;
+                canvas.height = size;
+                const ctx = canvas.getContext('2d');
+
+                // Background gradient
+                const gradient = ctx.createLinearGradient(0, 0, size, size);
+                gradient.addColorStop(0, '#E8D5C4');
+                gradient.addColorStop(1, '#D4A5A5');
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, size, size);
+
+                // Draw initials
+                ctx.fillStyle = '#ffffff';
+                ctx.font = `bold ${size * 0.4}px Playfair Display, serif`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('A & P', size / 2, size / 2);
+
+                // Draw heart symbol
+                ctx.font = `${size * 0.15}px Arial`;
+                ctx.fillText('♥', size / 2, size * 0.75);
+
+                // Add to preview
+                const previewItem = document.createElement('div');
+                previewItem.className = 'preview-item';
+
+                const img = document.createElement('img');
+                img.src = canvas.toDataURL();
+                img.width = Math.min(size, 150);
+
+                const label = document.createElement('p');
+                label.textContent = `${size}x${size}`;
+
+                const downloadLink = document.createElement('a');
+                downloadLink.href = canvas.toDataURL();
+                downloadLink.download = `icon-${size}x${size}.png`;
+                downloadLink.textContent = 'Download';
+                downloadLink.style.display = 'block';
+                downloadLink.style.marginTop = '10px';
+                downloadLink.style.padding = '5px 10px';
+                downloadLink.style.background = '#4CAF50';
+                downloadLink.style.color = 'white';
+                downloadLink.style.textDecoration = 'none';
+                downloadLink.style.borderRadius = '3px';
+
+                previewItem.appendChild(img);
+                previewItem.appendChild(label);
+                previewItem.appendChild(downloadLink);
+                preview.appendChild(previewItem);
+            });
+        }
+
+        function generateIconsFromImage(sourceImg) {
+            const preview = document.getElementById('preview');
+
+            sizes.forEach(size => {
+                const canvas = document.createElement('canvas');
+                canvas.width = size;
+                canvas.height = size;
+                const ctx = canvas.getContext('2d');
+
+                // Draw the uploaded image scaled to size
+                ctx.drawImage(sourceImg, 0, 0, size, size);
+
+                // Add to preview
+                const previewItem = document.createElement('div');
+                previewItem.className = 'preview-item';
+
+                const img = document.createElement('img');
+                img.src = canvas.toDataURL();
+                img.width = Math.min(size, 150);
+
+                const label = document.createElement('p');
+                label.textContent = `${size}x${size}`;
+
+                const downloadLink = document.createElement('a');
+                downloadLink.href = canvas.toDataURL();
+                downloadLink.download = `icon-${size}x${size}.png`;
+                downloadLink.textContent = 'Download';
+                downloadLink.style.display = 'block';
+                downloadLink.style.marginTop = '10px';
+                downloadLink.style.padding = '5px 10px';
+                downloadLink.style.background = '#4CAF50';
+                downloadLink.style.color = 'white';
+                downloadLink.style.textDecoration = 'none';
+                downloadLink.style.borderRadius = '3px';
+
+                previewItem.appendChild(img);
+                previewItem.appendChild(label);
+                previewItem.appendChild(downloadLink);
+                preview.appendChild(previewItem);
+            });
+        }
+    </script>
+</body>
+</html>
